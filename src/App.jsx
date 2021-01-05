@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux';
 import {addTodoInListAction} from '../src/store/reducers/todoListReducer'
 import {delTodoInListAction} from '../src/store/reducers/todoListReducer'
 
-import {fetchTodo} from '../src/store/actionThunk/serverTodo'
+import {addTodoInListSagaAction} from '../src/store/reducers/todoListReducer'
 
 function App() {
   //хук для диспача(обрашение к состоянию) и селекта(выбор состояния)
@@ -16,7 +16,7 @@ function App() {
   const desc = useSelector(state => state.todoReducer.desc);
 
   const list = useSelector(state => state.listTodoReducer.list)
-  console.log(list);
+  console.log("list ", list);
 
   //экшены
   const addCash = ()=>{
@@ -66,7 +66,7 @@ function App() {
         <p className="title">{title}</p>
         <p className="desc">{desc}</p>
       </div>
-      <p>Список задач</p>
+      {/* <p>Список задач</p>
       <button onClick={()=>addTodoInList(prompt('Введите заголовок задачи'), prompt('Введите описание задачи'))} >Добавить задачу</button>
       <div>
       {list.length > 0 ? 
@@ -84,16 +84,15 @@ function App() {
         <p className="title">Задач нет</p>
       </div> 
       }
-      </div>
+      </div> */}
       <p>Список задач из базы</p>
-      <button onClick={()=>dispatch(fetchTodo())} >Добавить задачи</button>
+      <button onClick={()=>dispatch(addTodoInListSagaAction())} >Добавить задачи</button>
       <div>
       {list.length > 0 ? 
         <div className="todo" >
           {list.map(todo=>
           <div onClick={()=>remTodoInList(todo)}> 
           <p className="title">{todo.title}</p>
-          <p className="desc">{todo.desc}</p>
           </div>
           )}
           

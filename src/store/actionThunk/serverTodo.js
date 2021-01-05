@@ -1,10 +1,5 @@
-import {addTodoInListThunkAction} from '../reducers/todoListReducer'
 
-// action thunk 
+// action saga
 export const fetchTodo = ()=>{
-  return dispatch =>{
-    fetch('https://jsonplaceholder.typicode.com/todos')
-    .then(response => response.json())
-    .then(json => dispatch(addTodoInListThunkAction(json)))
-  }
+  return fetch('https://jsonplaceholder.typicode.com/todos?_limit=10').then(response => response.json())
 }
